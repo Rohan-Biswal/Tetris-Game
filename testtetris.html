@@ -117,23 +117,14 @@ function isValidMove(matrix, cellRow, cellCol) {
   return true;
 }
 
-// Function to update score
-function updateScore(scoreCount) {
-  const scoreElement = document.getElementById("score");
-  score = scoreCount;
-  scoreElement.textContent = score;
-}
-
-function timScore(score){
-  startIncreasingScore(score);
-}
-
-function startIncreasingScore(score) {
-  // const scoreElement = document.getElementById("score");
-        // let score=0;
-        setInterval(() => {
-            updateScore(score+1);
-        }, 5000);
+// function to increase the score every 5 seconds
+function increaseScore() {
+  setInterval(() => {
+    if (!gameOver) {
+      scoreCount++;
+      document.getElementById('score').innerText =`${scoreCount}`;
+    }
+  }, 5000);
 }
 
 // place the tetromino on the playfield
@@ -157,7 +148,8 @@ function placeTetromino() {
     if (playfield[row].every(cell => !!cell)) {
 
       scoreCount++;
-      updateScore(scoreCount);
+      document.getElementById('score').innerText =`${scoreCount}`;
+      // updateScore(scoreCount);
       // drop every row above this one
       for (let r = row; r >= 0; r--) {
         for (let c = 0; c < playfield[r].length; c++) {
@@ -264,17 +256,16 @@ const colors = {
   'P': 'Brown'
 };
 let scoreCount=0;
+// let score=0;
 let count = 0;
 let tetromino = getNextTetromino();
 let rAF = null;  // keep track of the animation frame so we can cancel it
 let gameOver = false;
-let score=1;
 
 // game loop
-function loop(score) {
+function loop() {
   rAF = requestAnimationFrame(loop);
   context.clearRect(0,0,canvas.width,canvas.height);
-  timScore(score);
 
   // draw the playfield
   for (let row = 0; row < 36; row++) {
@@ -292,7 +283,7 @@ function loop(score) {
   // draw the active tetromino
   if (tetromino) {
 
-    // tetromino falls every 35 frames
+    // tetromino falls every 45 frames
     if (++count > 45) {
       tetromino.row++;
       count = 0;
@@ -356,8 +347,10 @@ document.addEventListener('keydown', function(e) {
     tetromino.row = row;
   }
 });
+// document.addEventListener('load', increaseScore);
 
 // start the game
+increaseScore();
 rAF = requestAnimationFrame(loop);
 </script>
 </body>
