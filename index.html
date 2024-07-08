@@ -153,6 +153,29 @@ function increaseLevel(){
   }, 30*1000);
 };
 
+function saveGameData(playerName, score, level) {
+      fetch('http://localhost:3000/saveGameData', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ playerName, score, level })
+      })
+      .then(response => response.text())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+    }
+
+    function getMaxScore() {
+      fetch('http://localhost:3000/maxScore')
+        .then(response => response.json())
+        .then(data => {
+          console.log('Max Score:', data.max_score);
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+
 // place the tetromino on the playfield
 function placeTetromino() {
   for (let row = 0; row < tetromino.matrix.length; row++) {
@@ -161,6 +184,7 @@ function placeTetromino() {
 
         // game over if piece has any part offscreen
         if (tetromino.row + row < 0) {
+          saveGameData(playerName, scoreCount, level)
           return showGameOver();
         }
 
@@ -286,6 +310,9 @@ let level=1;
 let tetromino = getNextTetromino();
 let rAF = null;  // keep track of the animation frame so we can cancel it
 let gameOver = false;
+let playerName='Rohan';
+let maxScore=getMaxScore();
+console.log(maxScore);
 
 // game loop
 function loop() {
