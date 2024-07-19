@@ -7,7 +7,7 @@ const port= process.env.PORT ||8400;
 const tetrisM=require("./models/tetrisM");
 app.use(cors(
     {
-        origin:[],
+        origin:["https://tetris-game-frontend.vercel.app/"],
         methods:["POST","GET"],
         credentials:true
     }
