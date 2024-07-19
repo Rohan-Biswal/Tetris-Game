@@ -128,10 +128,10 @@ function pData(){
     level:level
   }
 }
-const apiUrl = "https://backend-tetris-184zyjsk6-rohan-biswals-projects-ebf35a45.vercel.app/add-player-info";
+// const apiUrl = "https://backend-tetris-184zyjsk6-rohan-biswals-projects-ebf35a45.vercel.app/add-player-info";
 async function saveGameData(playerName, score, level) {
   try {
-    const response = await fetch(apiUrl || "http://localhost:8400/add-player-info", {
+    const response = await fetch("http://localhost:8400/add-player-info", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
