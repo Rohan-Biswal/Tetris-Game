@@ -8,11 +8,18 @@ const tetrisM=require("./models/tetrisM");
 app.use(cors(
     {
         origin:["https://tetris-game-frontend.vercel.app"],
-        methods:["POST","GET"],
+        methods:["POST","GET","OPTIONS"],
         credentials:true
     }
 ));
 app.use(express.json());
+
+app.use((req, res, next) => {
+    console.log(`${req.method} request for '${req.url}' - ${JSON.stringify(req.body)}`);
+    next();
+});
+
+app.options("*", cors());
 
 app.get("/",(req,res)=>{
     return res.status(200).send("Hello Gamer");
