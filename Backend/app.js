@@ -5,7 +5,13 @@ require("dotenv").config();
 const app=express();
 const port= process.env.PORT ||8400;
 const tetrisM=require("./models/tetrisM");
-app.use(cors());
+app.use(cors(
+    {
+        origin:[],
+        methods:["POST","GET"],
+        credentials:true
+    }
+));
 app.use(express.json());
 
 app.get("/",(req,res)=>{
