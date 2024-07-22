@@ -133,6 +133,7 @@ async function saveGameData(playerName, score, level) {
   try {
     const response = await fetch("https://tetris-game-backend.vercel.app/add-player-info", {
       method: "POST",
+      mode:"no-cors",
       headers: {
         "Content-Type": "application/json"
       },
