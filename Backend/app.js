@@ -5,13 +5,7 @@ require("dotenv").config();
 const app=express();
 const port= process.env.PORT ||8400;
 const tetrisM=require("./models/tetrisM");
-app.use(cors(
-    {
-        origin:["https://tetris-game-frontend.vercel.app"],
-        methods:["POST","GET","OPTIONS"],
-        credentials:false
-    }
-));
+app.use(cors());
 app.use(express.json());
 
 app.get("/",(req,res)=>{
