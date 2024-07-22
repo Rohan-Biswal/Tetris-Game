@@ -131,7 +131,7 @@ function pData(){
 // const apiUrl = "https://backend-tetris-184zyjsk6-rohan-biswals-projects-ebf35a45.vercel.app/add-player-info";
 async function saveGameData(playerName, score, level) {
   try {
-    const response = await fetch("https://tetris-game-backend-6pglprfxc-rohan-biswals-projects-ebf35a45.vercel.app/add-player-info", {
+    const response = await fetch("https://tetris-game-backend.vercel.app/add-player-info", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
