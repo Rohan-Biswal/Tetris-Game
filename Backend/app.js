@@ -31,6 +31,11 @@ app.post("/add-player-info",(req,res)=>{
     })
 })
 
+app.post("./api-test",(req,res)=>{
+    console.log("Testing..")
+    return res.status(200).send("correct");
+})
+
 
 
 app.listen(port,()=>{
