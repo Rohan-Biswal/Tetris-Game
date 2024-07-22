@@ -11,10 +11,15 @@ app.use(express.json());
 app.get("/",(req,res)=>{
     return res.status(200).send("Hello Gamer");
 });
+app.get("/test",(req,res)=>{
+    return res.status(200).send("Hello this is for testing");
+});
+
 
 app.post("/add-player-info",(req,res)=>{
     const playerInfo=req.body;
     const player=new tetrisM(playerInfo);
+    console.log("just Checking");
     player.save().then(()=>{
         console.log("data of player Saved in database");
         return res.status(200).json("Player Data Saved");
